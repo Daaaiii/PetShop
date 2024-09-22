@@ -2,21 +2,43 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('./dados/produtos.json')
         .then(response => response.json())
         .then(products => {
-            const container = document.getElementById('products-container');
-            products.forEach(product => {
-                const productDiv = document.createElement('div');
-                productDiv.classList.add('w-25', 'p-2');
-                productDiv.innerHTML = `
-                    <div class="card">
-                        <img src="${product.image}" class="card-img-top" alt="${product.name}" />
-                        <div class="card-body text-center">
-                            <h5 class="card-title">${product.name}</h5>
-                            <p class="card-text">${product.price}</p>
-                        </div>
-                    </div>
+            const carouselItemsContainer = document.getElementById("carouselItems");
+
+           
+            for (let i = 0; i < products.length; i += 2) {
+                const itemDiv = document.createElement("div");
+                itemDiv.classList.add("carousel-item");
+                if (i === 0) itemDiv.classList.add("active"); 
+                
+               
+                const rowDiv = document.createElement("div");
+                rowDiv.classList.add("row", "text-center", "mt-4");
+
+            
+                const col1 = document.createElement("div");
+                col1.classList.add("col-md-6", "text-center");
+                col1.innerHTML = `
+                    <img src="${products[i].image}"  alt="${products[i].name}">
+                    <h5>${products[i].name}</h5>
+                    <p>${products[i].price}</p>
                 `;
-                container.appendChild(productDiv);
-            });
+                rowDiv.appendChild(col1);
+
+                
+                if (i + 1 < products.length) {
+                    const col2 = document.createElement("div");
+                    col2.classList.add("col-md-6", "text-center");
+                    col2.innerHTML = `
+                        <img src="${products[i + 1].image}" alt="${products[i + 1].name}">
+                        <h5>${products[i + 1].name}</h5>
+                        <p>${products[i + 1].price}</p>
+                    `;
+                    rowDiv.appendChild(col2);
+                }
+
+                itemDiv.appendChild(rowDiv);
+                carouselItemsContainer.appendChild(itemDiv);
+            }
         })
         .catch(error => console.error('Erro ao carregar os produtos:', error));
 });

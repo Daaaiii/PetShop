@@ -62,16 +62,25 @@ h1{
 	color: var(--roxo);
 	border-color: var(--roxo);
 }
+.carousel-item img{
+	width: 75%;
+	height:75%;
+	object-fit:contain;	
+}
 
+.carousel-item h5, .carousel-item p {
+    margin-top: 10px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: Var(--roxo);
+}
 
 footer a {
-    color: var(--roxo); 
-    text-decoration: none;
+    color: var(--roxo);   
 }
 
-footer a:hover {
-    text-decoration: underline; 
-}
 
 footer .container {
     max-width: 1140px; 
